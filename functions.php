@@ -15,6 +15,7 @@
 		wp_enqueue_style('rateit', get_template_directory_uri().'/assets/css/rateit.css',array(),'1.0','all');
 		wp_enqueue_style('bootstrap-select', get_template_directory_uri().'/bootstrap-select.min.css',array(),'1.6.2','all');
 		wp_enqueue_style('font-awesome', get_template_directory_uri().'/assets/css/font-awesome.css',array(),'4.6.2','all');
+		wp_enqueue_style( 'flipmart', get_stylesheet_uri() );
 
 
 		wp_enqueue_script('bootstrap', get_template_directory_uri().'/assets/js/bootstrap.min.js', array('jquery'), '3.2.0', true);
@@ -38,7 +39,13 @@
 		add_theme_support( 'woocommerce' );
 	}
 
-
+	// Change number or products per row to 3
+	add_filter('loop_shop_columns', 'loop_columns');
+	if (!function_exists('loop_columns')) {
+		function loop_columns() {
+			return 3; // 3 products per row
+		}
+	}
 
 
 
