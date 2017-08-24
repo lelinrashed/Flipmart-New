@@ -1,6 +1,6 @@
 <?php 
 
-	
+		
 	// for support title
 	add_theme_support( 'title-tag' );
 
@@ -33,7 +33,10 @@
 	add_action('wp_enqueue_scripts', 'flipmart_enqueue_scripts');
 
 
-
+	add_action( 'after_setup_theme', 'woocommerce_support' );
+	function woocommerce_support() {
+		add_theme_support( 'woocommerce' );
+	}
 
 
 

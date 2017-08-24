@@ -11,7 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <?php wp_head(); ?>
   </head>
-  <body class="cnt-home">
+  <body <?php body_class(); ?> >
     <!--  HEADER  -->
     <header class="header-style-1">
       <div class="top-bar animate-dropdown">
