@@ -90,3 +90,20 @@
 	border-radius: 4px;
 	color: #fff;
 }
+
+.show_product{
+	display: inline;
+	padding: 0 15px;
+}
+
+select.orderby {
+	padding: 2px;
+	border: 1px solid #ddd;
+}
+
+span.sort_by {
+    font-size: 14px;
+    display: inline-block;
+    padding-top: 3px;
+    padding-right: 10px;
+}

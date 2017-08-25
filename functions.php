@@ -143,9 +143,66 @@
 	}
 
 
+	// woocommerce shop page show per page drop down
+	function flipmart_woocommerce_catalog_page_ordering() {
+	?>
+
+	<?php echo '<span class="itemsorder">Show' ?>
+	<form class="show_product" action="" method="POST" name="results">
+	<select name="woocommerce-sort-by-columns" id="woocommerce-sort-by-columns" class="sortby" onchange="this.form.submit()">
+	<?php
+
+			//  This is where you can change the amounts per page that the user will use  feel free to change the numbers and text as you want, in my case we had 4 products per row so I chose to have multiples of four for the user to select.
+
+	$shopCatalog_orderby = apply_filters('woocommerce_sortby_page', array(
+					''       => __('20', 'woocommerce'),
+					'10'    => __('10', 'woocommerce'),
+					'20'    => __('20', 'woocommerce'),
+					'30'    => __('30', 'woocommerce'),
+					'40'    => __('40', 'woocommerce'),
+					'50'    => __('50', 'woocommerce'),
+					'-1'    => __('All', 'woocommerce'),
+				));
+
+				foreach ( $shopCatalog_orderby as $sort_id => $sort_name )
+					echo '<option value="' . $sort_id . '" ' . selected( $_SESSION['sortby'], $sort_id, false ) . ' >' . $sort_name . '</option>';
+			?>
+	</select>
+
+	</form>
+	<?php
+		echo '</span>';
+	} 
+
+	// now we set our cookie if we need to
+	function dl_sort_by_page($count) {
+	  if (isset($_COOKIE['shop_pageResults'])) { // if normal page load with cookie
+		 $count = $_COOKIE['shop_pageResults'];
+	  }
+	  if (isset($_POST['woocommerce-sort-by-columns'])) { //if form submitted
+		setcookie('shop_pageResults', $_POST['woocommerce-sort-by-columns'], time()+1209600, '/', 'beadsnwire.lukeseall.co.uk/', false); //this will fail if any part of page has been output- hope this works!
+		$count = $_POST['woocommerce-sort-by-columns'];
+	  }
+	  // else normal page load and no cookie
+	  return $count;
+	}
+
+	add_filter('loop_shop_per_page','dl_sort_by_page');
 
 
+	//for custom sorting option in shop page
+	add_filter( 'woocommerce_catalog_orderby', 'flipmart_woocommerce_catalog_orderby' );
 
-
+	function flipmart_woocommerce_catalog_orderby( $sortby ) {
+		$sortby['menu_order'] = 'Position';
+		$sortby['price'] = 'Price:Lowest first';
+		$sortby['price-deac'] = 'Price:Heighest first';
+		unset($sortby['popularity']);
+		unset($sortby['date']);
+		unset($sortby['rating']);
+		return $sortby;
+	}
+	
+	
 
  ?>

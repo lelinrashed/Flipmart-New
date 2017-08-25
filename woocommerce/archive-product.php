@@ -77,9 +77,15 @@ get_header( 'shop' ); ?>
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
 				<div class="row">
-					<div class="col-md-3">1</div>
-					<div class="col-md-3">2</div>
-					<div class="col-md-3">3</div>
+					<div class="col-md-2">1</div>
+					<div class="col-md-4">
+						
+						<form class="woocommerce-ordering" method="get">
+						<span class="sort_by">Sort by</span>
+							<?php woocommerce_catalog_ordering(); ?>
+						</form>
+					</div>
+					<div class="col-md-3"><?php flipmart_woocommerce_catalog_page_ordering(); ?></div>
 					<div class="col-md-3"><?php flipmart_pagination(); ?></div>
 				</div>
 		
