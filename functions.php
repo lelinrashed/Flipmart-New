@@ -33,7 +33,8 @@
 	}
 	add_action('wp_enqueue_scripts', 'flipmart_enqueue_scripts');
 
-
+	
+	// For support woocommerce theme
 	add_action( 'after_setup_theme', 'woocommerce_support' );
 	function woocommerce_support() {
 		add_theme_support( 'woocommerce' );
@@ -48,6 +49,59 @@
 	}
 
 
+	// change add  to cart button text	
+	add_filter( 'woocommerce_product_add_to_cart_text' , 'custom_woocommerce_product_add_to_cart_text' );
+
+	function custom_woocommerce_product_add_to_cart_text() {
+		global $product;
+		
+		$product_type = $product->get_type();
+		
+		switch ( $product_type ) {
+			case 'external':
+				return __( 'Buy product', 'woocommerce' );
+			break;
+			case 'grouped':
+				return __( 'View products', 'woocommerce' );
+			break;
+			case 'simple':
+				return __( 'Add cart', 'woocommerce' );
+			break;
+			case 'variable':
+				return __( 'My Select options', 'woocommerce' );
+			break;
+			default:
+				return __( 'Read more', 'woocommerce' );
+		}
+		
+	}
+	
+	
+	// change breadcrumb function
+	add_filter( 'woocommerce_breadcrumb_defaults', 'flipmart_woocommerce_breadcrumbs' );
+	function flipmart_woocommerce_breadcrumbs() {
+		return array(
+				'delimiter'   => ' &#47; ',
+				'wrap_before' => '<div class="breadcrumb-inner"><ul class="list-inline list-unstyled">',
+				'wrap_after'  => '</ul></div>',
+				'before'      => '',
+				'after'       => '',
+				'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+			);
+	}
+	
+	
+	// remove woocommerce default breadcrumb
+	add_action( 'init', 'flipmart_remove_wc_breadcrumbs' );
+	function flipmart_remove_wc_breadcrumbs() {
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+	}
+	
+	// remove woocommerce result count
+	add_action( 'init', 'flipmart_woocommerce_result_count' );
+	function flipmart_woocommerce_result_count() {
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20, 0 );
+	}
 
 
 

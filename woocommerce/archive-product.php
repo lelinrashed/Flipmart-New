@@ -22,15 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'shop' ); ?>
 <div class="breadcrumb">
-      <div class="container">
-        <div class="breadcrumb-inner">
-          <ul class="list-inline list-unstyled">
-            <li><a href="#">Home</a></li>
-            <li class="active">Handbags</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <div class="container">
+	<?php woocommerce_breadcrumb(); ?>
+  </div>
+</div>
 <div class="body-content outer-top-xs">
 <div class="container">
 <div class="row">
@@ -54,7 +49,7 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_before_main_content' );
 	?>
 
-		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+		<?php if ( apply_filters( 'woocommerce_show_page_title', false ) ) : ?>
 
 			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 
