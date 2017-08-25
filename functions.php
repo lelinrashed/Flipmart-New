@@ -102,10 +102,45 @@
 	function flipmart_woocommerce_result_count() {
 		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20, 0 );
 	}
+	
+	// remove woocommerce catalog ordering
+	add_action( 'init', 'flipmart_woocommerce_catalog_ordering' );
+	function flipmart_woocommerce_catalog_ordering() {
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30, 0 );
+	}
+	// remove woocommerce default bottom pagination
+	add_action( 'init', 'flipmart_woocommerce_pagination' );
+	function flipmart_woocommerce_pagination() {
+		remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10, 0 );
+	}
 
 
 
+	function flipmart_pagination() {
 
+	global $wp_query;
+
+	$big = 999999999; // need an unlikely integer
+
+	$pages = paginate_links( array(
+			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+			'format' => '?paged=%#%',
+			'current' => max( 1, get_query_var('paged') ),
+			'total' => $wp_query->max_num_pages,
+			'type'  => 'array',
+			'prev_next'          => true,
+			'prev_text'          => __('<i class="fa fa-angle-left" aria-hidden="true"></i>'),
+			'next_text'          => __('<i class="fa fa-angle-right" aria-hidden="true"></i>'),
+		) );
+		if( is_array( $pages ) ) {
+			$paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
+			echo '<div class="pagination-container"><ul class="list-inline list-unstyled">';
+			foreach ( $pages as $page ) {
+					echo "<li>$page</li>";
+			}
+		    echo '</ul></div>';
+			}
+	}
 
 
 

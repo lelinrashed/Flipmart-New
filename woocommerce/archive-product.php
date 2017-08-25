@@ -76,7 +76,12 @@ get_header( 'shop' ); ?>
 				 */
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
-
+				<div class="row">
+					<div class="col-md-3">1</div>
+					<div class="col-md-3">2</div>
+					<div class="col-md-3">3</div>
+					<div class="col-md-3"><?php flipmart_pagination(); ?></div>
+				</div>
 		
 			<?php woocommerce_product_loop_start(); ?>
 
@@ -99,7 +104,7 @@ get_header( 'shop' ); ?>
 				 */
 				do_action( 'woocommerce_after_shop_loop' );
 			?>
-
+<?php flipmart_pagination(); ?>
 		<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
 			<?php wc_get_template( 'loop/no-products-found.php' ); ?>

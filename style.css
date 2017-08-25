@@ -69,3 +69,24 @@
 .woocommerce ul.products li.product .price ins{
 	text-decoration: none;
 }
+
+.pagination-container {
+    float: right;
+}
+
+.pagination-container ul li a.next.page-numbers{
+	background: #ddd;
+	padding: 0 8px;
+	border-radius: 4px;
+	color: #fff;
+}
+.pagination-container ul li:hover a.next.page-numbers, .pagination-container ul li:hover a.prev.page-numbers{
+	background: #333;
+}
+
+.pagination-container ul li a.prev.page-numbers{
+	background: #ddd;
+	padding: 0 8px;
+	border-radius: 4px;
+	color: #fff;
+}
