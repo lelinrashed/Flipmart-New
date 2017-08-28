@@ -204,5 +204,28 @@
 	}
 	
 	
+	// remove woocommerce default grid list view
+	
+	function flipmart_remove_gridlist_actions(){
+	 global $WC_List_Grid   ;
+	 remove_action( 'woocommerce_before_shop_loop', array( $WC_List_Grid, 'gridlist_toggle_button' ), 30); 
+	}
+	add_action('woocommerce_archive_description','flipmart_remove_gridlist_actions');
+	
+	
+	// register sidebar for category menu
+	add_action( 'widgets_init', 'theme_slug_widgets_init' );
+	function theme_slug_widgets_init() {
+		register_sidebar( array(
+			'name' => __( 'Left Sidebar', 'theme-slug' ),
+			'id' => 'left_sidebar',
+			'description' => __( 'Widgets in this area will be shown all category.', 'theme-slug' ),
+		'before_widget' => '<div class="sidebar-widget wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="section-title">',
+		'after_title'   => '</h3>',
+		) );
+	}
+	
 
  ?>

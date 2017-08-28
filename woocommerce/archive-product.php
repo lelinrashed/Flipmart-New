@@ -77,7 +77,14 @@ get_header( 'shop' ); ?>
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
 				<div class="row">
-					<div class="col-md-2">1</div>
+					<div class="col-md-2">						
+						<ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
+						  <li class="active">
+							<a href="#" id="grid" title="Grid view"><i class="icon fa fa-th-large"></i>Grid</a>
+						  </li>
+						  <li><a href="#" id="list" title="List view"><i class="icon fa fa-th-list"></i>List</a></li>
+						</ul>
+					</div>
 					<div class="col-md-4">
 						
 						<form class="woocommerce-ordering" method="get">
